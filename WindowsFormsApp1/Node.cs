@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace WindowsFormsApp1
 {
-    internal class Lista
+    internal class Node
     {
+        public Node() {}
+        public string Valor { get; set; }
+        public string ProxValor { get; set; }
+
     }
 }
