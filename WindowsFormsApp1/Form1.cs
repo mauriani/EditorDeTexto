@@ -188,11 +188,16 @@ namespace WindowsFormsApp1
         // BUTTON MENU SALVAR ARQUIVO
         private void toolStripButton3_Click(object sender, EventArgs e)
         {
-           
+            salvar_Arquivo();
 
         }
 
         private void saveFileDialog1_FileOk(object sender, CancelEventArgs e)
+        {
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
         {
 
         }
