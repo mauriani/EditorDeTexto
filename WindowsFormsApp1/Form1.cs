@@ -79,6 +79,12 @@ namespace WindowsFormsApp1
                 MessageBox.Show("Atenção" + error.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        private void hash_Insert()
+        {
+           // função hash
+
+        }
+        int[] vetor = new int[100];
 
         // QUANDO O USUÁRIO INSERE O TEXTO
         private void button1_Click(object sender, EventArgs e)
@@ -87,7 +93,7 @@ namespace WindowsFormsApp1
 
             
             string text = richTextBox1.Text;
-            char[] delimiterChars = { ' ', ',', '.', ':', '\t' };
+            char[] delimiterChars = { ' ', ',', '.', ':', '\t','\n' };
             string[] words = text.Split(delimiterChars);
             List<string> dicionario = new List<string>();
 
@@ -101,7 +107,7 @@ namespace WindowsFormsApp1
                 } 
             }
 
-            Console.WriteLine(dicionario);
+            Console.WriteLine(dicionario + "dicionario");
 
 
         }

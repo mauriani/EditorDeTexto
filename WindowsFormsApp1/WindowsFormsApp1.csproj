@@ -46,8 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LinkedList.cs" />
-    <Compile Include="Node.cs" />
+    <Compile Include="No.cs" />
+    <Compile Include="ListaEncadeada.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
