@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace WindowsFormsApp1
 {
@@ -79,9 +80,19 @@ namespace WindowsFormsApp1
                 MessageBox.Show("Atenção" + error.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private void hash_Insert()
+        int hash_Insert(string str)
         {
-           // função hash
+            // função hash
+            byte[] ASCIIvalues = Encoding.ASCII.GetBytes(str);
+            int result = 0;
+
+
+            foreach (var value in ASCIIvalues)
+            {
+                result = value + result;
+            }
+
+            return result%100;
 
         }
         int[] vetor = new int[100];
@@ -93,8 +104,12 @@ namespace WindowsFormsApp1
 
             
             string text = richTextBox1.Text;
-            char[] delimiterChars = { ' ', ',', '.', ':', '\t','\n' };
-            string[] words = text.Split(delimiterChars);
+
+            Regex reg = new Regex("[*'\",_&#^@]");
+            string str1 = reg.Replace(text, string.Empty);
+
+            // char[] delimiterChars = { ' ' };
+            string[] words = str1.Split(' ');
             List<string> dicionario = new List<string>();
 
             foreach (var word in words)
