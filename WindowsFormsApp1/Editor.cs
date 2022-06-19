@@ -17,14 +17,16 @@ namespace WindowsFormsApp1
         }
         public string[] carregaDicio()
         {
-            string path = @"C:\Users\lucas\OneDrive\Documentos\dicionario.txt";
+            string path = "..\\..\\dicionario.txt";
             string conteudo = File.ReadAllText(path, Encoding.UTF8);
+
+            Console.WriteLine(conteudo);
 
             return conteudo.Split(',');
         }
         public void setDicio(string plvSalvar)
         {
-            string path = @"C:\Users\lucas\OneDrive\Documentos\dicionario.txt";
+            string path = "..\\..\\dicionario.txt";
             File.AppendAllText(path, plvSalvar);
             dicio = carregaDicio();
         }
