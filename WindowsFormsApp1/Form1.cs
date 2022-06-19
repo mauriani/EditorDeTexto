@@ -14,9 +14,11 @@ namespace WindowsFormsApp1
 {
     public partial class Form1 : Form
     {
+        Editor editor = new Editor();
         public Form1()
         {
             InitializeComponent();
+            
         }
 
         // FUNÇÕES
@@ -59,7 +61,7 @@ namespace WindowsFormsApp1
             try
             {
                 // ABRE A JANELA DO COMPUTADOR PARA ESCOLHER ONDE SALVAR O ARQUIVO
-                if(this.saveFileDialog1.ShowDialog() == DialogResult.OK)
+                if (this.saveFileDialog1.ShowDialog() == DialogResult.OK)
                 {
                     // abre um stream para escrita e cria um StreamWriter para implementar o stream
                     FileStream fs = new FileStream(saveFileDialog1.FileName, FileMode.OpenOrCreate, FileAccess.Write);
@@ -75,7 +77,7 @@ namespace WindowsFormsApp1
                 }
 
             }
-            catch(Exception error)
+            catch (Exception error)
             {
                 MessageBox.Show("Atenção" + error.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -92,7 +94,7 @@ namespace WindowsFormsApp1
                 result = value + result;
             }
 
-            return result%100;
+            return result % 100;
 
         }
         int[] vetor = new int[100];
@@ -100,41 +102,51 @@ namespace WindowsFormsApp1
         // QUANDO O USUÁRIO INSERE O TEXTO
         private void button1_Click(object sender, EventArgs e)
         {
-            // CORRIGIR A LISTA, VINDO COM ESPAÇO
 
-            
+            //Limpando checkbox antes de prosseguir com a função
+            checkedListBox1.Items.Clear();
+
             string text = richTextBox1.Text;
 
-            Regex reg = new Regex("[*'\",_&#^@]");
-            string str1 = reg.Replace(text, string.Empty);
+            // REMOVENDO CARACTERES ESPECIAIS DO INPUT DO USUARIO
+            string textoLimpo = text;
+            string[] caracteresEspeciais = { "¹", "²", "³", "£", "¢", "¬", "º", "¨", "'", ".", ",", "-", ":", "(", ")", "ª", "|", "\\", "°", "_", "@", "#", "!", "$", "%", "&", "*", ";", "/", "<", ">", "?", "[", "]", "{", "}", "=", "+", "§", "´", "`", "^", "~", "\n", "\"", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
-            // char[] delimiterChars = { ' ' };
-            string[] words = str1.Split(' ');
-            List<string> dicionario = new List<string>();
-
-            foreach (var word in words)
+            for (int i = 0; i < caracteresEspeciais.Length; i++)
             {
-                System.Console.WriteLine(word);
-
-                if(word.Length > 0)
-                {
-                    dicionario.Add(word);
-                } 
+                textoLimpo = textoLimpo.Replace(caracteresEspeciais[i], "");
             }
 
-            Console.WriteLine(dicionario + "dicionario");
+            string[] arrTextoLimpo = textoLimpo.Split(' ');
+            string[] palavrasDesconhecidas = editor.comparaTexto(arrTextoLimpo);
 
+            List<string> plvCkBox = new List<string>();
 
+            foreach (string palavra in palavrasDesconhecidas)
+            {
+                if(palavra != null)
+                {
+                    if (!plvCkBox.Contains(palavra))
+                    {
+                        plvCkBox.Add(palavra);
+                    }
+                    
+                }
+            }
+
+            string[] arrPlvCkBox = plvCkBox.ToArray();
+
+            checkedListBox1.Items.AddRange(arrPlvCkBox);
         }
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            
+
         }
 
         private void openFileDialog_FileOk(object sender, CancelEventArgs e)
         {
-          
+
         }
 
         private void richTextBox1_TextChanged(object sender, EventArgs e)
@@ -205,7 +217,7 @@ namespace WindowsFormsApp1
             }
 
         }
-        
+
         // BUTTON MENU SALVAR ARQUIVO
         private void toolStripButton3_Click(object sender, EventArgs e)
         {
@@ -219,6 +231,43 @@ namespace WindowsFormsApp1
         }
 
         private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            string plvSalvar = "";
+
+            foreach(string item in checkedListBox1.Items)
+            {
+                if (checkedListBox1.CheckedItems.Contains(item))
+                {
+                    plvSalvar = plvSalvar + ',' + item;
+                }
+            }
+
+            editor.setDicio(plvSalvar);
+
+            button1_Click(null, null);
+        }
+
+        private void label1_Click_1(object sender, EventArgs e)
         {
 
         }
