@@ -23,25 +23,7 @@ namespace WindowsFormsApp1
 
         // FUNÇÕES
 
-        private void salva_arquivo_lista()
-        {
-            string text = richTextBox1.Text;
-            char[] delimiterChars = { ' ', ',', '.', ':', '\t' };
-            string[] words = text.Split(delimiterChars);
-            List<string> dicionario = new List<string>();
-
-            foreach (var word in words)
-            {
-                System.Console.WriteLine(word);
-
-                if (word.Length > 0)
-                {
-                    dicionario.Add(word);
-                }
-            }
-
-            Console.WriteLine(dicionario);
-        }
+       
 
         private void alert_Salvar()
         {
@@ -268,6 +250,11 @@ namespace WindowsFormsApp1
         }
 
         private void label1_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
 
         }
